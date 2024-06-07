@@ -96,7 +96,7 @@ int main(int argc, char **argv) {
         printf(" \x1b[44;37m.----------------------------------------------------------------------------.\x1b[40;37m\n");
         printf(" \x1b[44;37m|  PS2 Donut v1.0                                                            |\x1b[40;37m\n");
         printf(" \x1b[44;37m|  Based on the original donut.c by Andy Sloane <andy@a1k0n.net>             |\x1b[40;37m\n");
-        printf(" \x1b[44;37m|  GameCube Donut by jornmann <jornmann@duck.com>, PS2 port by Code Copilot  |\x1b[40;37m\n");
+        printf(" \x1b[44;37m|  GameCube Donut by jornmann <jornmann@duck.com>, PS2 port by flamelord626  |\x1b[40;37m\n");
         printf(" \x1b[44;37m|  Music by Jogeir Liljedahl                                                 |\x1b[40;37m\n");
         printf(" \x1b[44;37m'----------------------------------------------------------------------------'\x1b[40;37m\n");
     }
