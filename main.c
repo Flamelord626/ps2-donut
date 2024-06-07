@@ -11,8 +11,6 @@
 #include <sbv_patches.h>
 #include <fileio.h>
 
-extern unsigned char music_mod[];
-
 static GSGLOBAL *gsGlobal;
 static AUDSRV_INFO audsrv_info;
 
@@ -75,17 +73,35 @@ void drawDonut(float A, float B) {
     gsKit_sync_flip(gsGlobal);
 }
 
+void playMOD(const char *filename) {
+    FILE *modFile = fopen(filename, "rb");
+    if (modFile == NULL) {
+        printf("Failed to open MOD file: %s\n", filename);
+        return;
+    }
+
+    fseek(modFile, 0, SEEK_END);
+    long modSize = ftell(modFile);
+    fseek(modFile, 0, SEEK_SET);
+
+    void *modData = malloc(modSize);
+    if (modData == NULL) {
+        printf("Failed to allocate memory for MOD file\n");
+        fclose(modFile);
+        return;
+    }
+
+    fread(modData, 1, modSize, modFile);
+    fclose(modFile);
+
+    audsrv_load_mod(modData);
+    audsrv_play();
+}
+
 int main(int argc, char **argv) {
     InitPS2();
 
-    
-    int ret = audsrv_load_module(AUDSRV_LOAD_MODULE);
-    if (ret < 0) {
-        printf("Error loading audio module\n");
-        return 1;
-    }
-
-    
+    playMOD("host:audio/mod.mod");
 
     float A = 0, B = 0;
     while (1) {
@@ -100,6 +116,9 @@ int main(int argc, char **argv) {
         printf(" \x1b[44;37m|  Music by Jogeir Liljedahl                                                 |\x1b[40;37m\n");
         printf(" \x1b[44;37m'----------------------------------------------------------------------------'\x1b[40;37m\n");
     }
+
+    return 0;
+}
 
     return 0;
 }
