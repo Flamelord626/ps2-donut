@@ -17,18 +17,18 @@ static GSGLOBAL *gsGlobal;
 static AUDSRV_INFO audsrv_info;
 
 void InitPS2() {
-    // Initialize PS2 graphics system
+    
     dmaKit_init(D_CTRL_RELE_OFF, D_CTRL_MFD_OFF, D_CTRL_STS_UNSPEC, D_CTRL_RELE_OFF);
     dmaKit_chan_init(DMA_CHANNEL_GIF);
     gsGlobal = gsKit_init_global();
     gsKit_mode_switch(gsGlobal, GS_PERSISTENT);
     gsGlobal->PrimAlphaEnable = GS_SETTING_ON;
 
-    // Set display buffer
+    
     gsKit_init_screen(gsGlobal);
     gsKit_set_display_buffer(gsGlobal, 0);
 
-    // Initialize audio system
+    
     sbv_patch_enable_lmb();
     audsrv_init();
     audsrv_set_volume(MAX_VOLUME);
@@ -78,18 +78,14 @@ void drawDonut(float A, float B) {
 int main(int argc, char **argv) {
     InitPS2();
 
-    // Initialize audio subsystem
+    
     int ret = audsrv_load_module(AUDSRV_LOAD_MODULE);
     if (ret < 0) {
         printf("Error loading audio module\n");
         return 1;
     }
 
-    // Play MOD file (assuming you have a suitable MOD file and function to play it)
-    // MODPlay_Init(&play);
-    // MODPlay_SetMOD(&play, music_mod);
-    // MODPlay_SetVolume(&play, 63, 63);
-    // MODPlay_Start(&play);
+    
 
     float A = 0, B = 0;
     while (1) {
